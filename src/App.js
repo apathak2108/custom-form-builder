@@ -1,7 +1,8 @@
 import React from "react";
+import HomeAdaptive from "./pages/home";
 
 const App = () => {
-  return <div className="App"></div>;
+  return <HomeAdaptive />;
 };
 
 export default App;
