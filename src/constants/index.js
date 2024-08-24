@@ -1,0 +1,16 @@
+export const STRINGS = {
+  NEW_FORM: "New Form",
+  ADD_FORM_CARD_ALT: "add-form-icon",
+  FEEDBACK_CARD_ALT: "feedback-card-logo",
+  VIEW_SUBMISSION: "VIEW SUBMISSION",
+  EDIT: "EDIT",
+  DELETE: "DELETE",
+  DELIVERY: "Delivery",
+  SUBMITTED: "Submitted",
+  VIEWED: "Viewed",
+  DATE_PUBLISHED: "Date Published",
+  PRIMARY: "primary",
+  SUCCESS: "success",
+  CONTAINED: "contained",
+  SECONDARY: "secondary",
+};
