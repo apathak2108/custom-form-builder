@@ -6,7 +6,7 @@ export const StyledLayout = styled.main`
 `;
 
 export const StyledLayoutChildrenContainer = styled.main`
-  height: calc(100vh - 64px);
+  height: calc(100vh - 65px);
   width: 100%;
   background-color: rgba(243, 243, 243, 1);
 `;

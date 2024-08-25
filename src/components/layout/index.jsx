@@ -2,10 +2,10 @@ import React from "react";
 import { StyledLayout, StyledLayoutChildrenContainer } from "./layout.styled";
 import Header from "../header";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, headerFlag = false }) => {
   return (
     <StyledLayout>
-      <Header />
+      <Header flag={headerFlag} />
       <StyledLayoutChildrenContainer>{children}</StyledLayoutChildrenContainer>
     </StyledLayout>
   );

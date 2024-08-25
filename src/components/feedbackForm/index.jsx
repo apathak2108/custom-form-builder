@@ -10,6 +10,7 @@ import LeftArrowIcon from "../../assets/feedbackForm/leftArrowIcon.svg";
 import EditIcon from "../../assets/feedbackForm/editIcon.svg";
 import { STRINGS } from "../../constants";
 import { useSelector } from "react-redux";
+import FormField from "../formField";
 
 const FeedbackForm = () => {
   const titleName = useSelector((state) => state?.home?.newFeedbackTitleName);
@@ -24,7 +25,12 @@ const FeedbackForm = () => {
         </StyledFeedbackFormHeading>
       </StyledFeedbackFormHeader>
       <StyledFeedbackFormContentContainer>
-        <StyledEmptyFormText>{STRINGS.ADD_FIELDS}</StyledEmptyFormText>
+        {/* <StyledEmptyFormText>{STRINGS.ADD_FIELDS}</StyledEmptyFormText> */}
+        <FormField multiLineText />
+        <FormField starRating />
+        <FormField smileyRating />
+        <FormField singleLineText />
+        <FormField numericRating />
       </StyledFeedbackFormContentContainer>
     </StyledFeedbackFormContainer>
   );

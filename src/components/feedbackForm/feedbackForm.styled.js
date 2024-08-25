@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
 export const StyledFeedbackFormContainer = styled.div`
+  height: calc(100% - 32px);
   width: 450px;
   background-color: rgba(255, 255, 255, 1);
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  overflow-y: scroll;
 `;
 
 export const StyledFeedbackFormHeader = styled.section`
@@ -38,4 +40,3 @@ export const StyledEmptyFormText = styled.span`
   color: rgba(92, 88, 88, 1);
   margin: auto;
 `;
-
