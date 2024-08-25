@@ -4,7 +4,7 @@ import NewFeedbackContainer from "../../containers/newFeedback";
 
 const NewFeedbackAdaptive = () => {
   return (
-    <Layout>
+    <Layout headerFlag={true}>
       <NewFeedbackContainer />
     </Layout>
   );

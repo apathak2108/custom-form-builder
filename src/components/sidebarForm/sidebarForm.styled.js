@@ -8,7 +8,6 @@ export const StyledSidebarContainer = styled.aside`
   background-color: rgba(255, 255, 255, 1);
   display: flex;
   flex-flow: column;
-  overflow-y: scroll;
 `;
 
 export const StyledSidebarContentContainer = styled.div`
@@ -17,6 +16,7 @@ export const StyledSidebarContentContainer = styled.div`
   display: flex;
   flex-flow: column;
   gap: 32px;
+  overflow-y: scroll;
 `;
 
 export const StyledSidebarAddFieldContainer = styled.section`
@@ -28,7 +28,7 @@ export const StyledSidebarAddFieldContainer = styled.section`
 export const StyledSidebarHeading = styled.span`
   font-size: 20px;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 `;
 
 export const StyledSidebarField = styled.article`
@@ -43,7 +43,7 @@ export const StyledSidebarFieldContent = styled.span`
   align-items: center;
 `;
 
-export const StyledAddIcon = styled.img`
+export const StyledIcon = styled.img`
   cursor: pointer;
 `;
 
@@ -57,4 +57,27 @@ export const StyledToggleField = styled.article`
   display: flex;
   flex-flow: column;
   gap: 12px;
+`;
+
+export const StyledCustomFieldContainer = styled.section`
+  display: flex;
+  flex-flow: column;
+  gap: 16px;
+  padding: 0 16px;
+`;
+
+export const StyledBackHeading = styled.span`
+  font-weight: 600;
+  margin-left: -6px;
+`;
+
+export const StyledCustomFieldButtonsContainer = styled.span`
+  display: flex;
+  gap: 12px;
+`;
+
+export const StyledSidebarCustomFieldContent = styled(
+  StyledSidebarFieldContent
+)`
+  margin-left: -14px;
 `;

@@ -6,12 +6,13 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 export const StyledLeftHeader = styled.section`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 export const StyledHeaderHeading = styled.span`

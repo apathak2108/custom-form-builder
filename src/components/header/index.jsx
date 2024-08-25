@@ -7,12 +7,17 @@ import {
 } from "./header.styled";
 import HeaderLogo from "../../assets/header/headerLogo.svg";
 import { Button } from "@mui/material";
-import { STRINGS } from "../../constants";
+import { ROUTES, STRINGS } from "../../constants";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ flag = false }) => {
+  const navigate = useNavigate();
+  const handleHeaderLogoClick = () => {
+    navigate(ROUTES.HOME);
+  };
   return (
     <StyledHeader>
-      <StyledLeftHeader>
+      <StyledLeftHeader onClick={handleHeaderLogoClick}>
         <img src={HeaderLogo} alt={STRINGS.HEADER_LOGO} />
         <StyledHeaderHeading>{STRINGS.USER_FEEDBACK}</StyledHeaderHeading>
       </StyledLeftHeader>
