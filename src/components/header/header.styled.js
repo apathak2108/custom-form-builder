@@ -6,7 +6,7 @@ export const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 `;
 
 export const StyledLeftHeader = styled.section`
@@ -21,4 +21,8 @@ export const StyledHeaderHeading = styled.span`
   font-weight: 500;
 `;
 
-export const StyledRightHeader = styled.section``;
+export const StyledRightHeader = styled.section`
+  display: flex;
+  margin-right: 16px;
+  gap: 22px;
+`;

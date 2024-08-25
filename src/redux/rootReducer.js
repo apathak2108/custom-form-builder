@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
+import homeReducer from "./reducers/home";
 
 const rootReducer = combineReducers({
-  a: 10,
+  home: homeReducer,
 });
 
 export default rootReducer;
