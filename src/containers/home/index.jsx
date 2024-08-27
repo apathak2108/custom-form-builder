@@ -16,9 +16,6 @@ const HomeContainer = () => {
       <NewFormCard />
       <FeedbackCard />
       <FeedbackCard />
-      <FeedbackCard />
-      <FeedbackCard />
-      <FeedbackCard />
       {isDialogOpen && <DialogComponent title={STRINGS.CREATE_FEEDBACK_FORM} />}
     </StyledHomeContainer>
   );

@@ -5,23 +5,34 @@ import {
   StyledFeedbackFormContentContainer,
   StyledFeedbackFormHeader,
   StyledFeedbackFormHeading,
+  StyledIcon,
 } from "./feedbackForm.styled";
 import LeftArrowIcon from "../../assets/feedbackForm/leftArrowIcon.svg";
-import EditIcon from "../../assets/feedbackForm/editIcon.svg";
-import { STRINGS } from "../../constants";
+import { ROUTES, STRINGS } from "../../constants";
 import { useSelector } from "react-redux";
 import FormField from "../formField";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FeedbackForm = () => {
-  const titleName = useSelector((state) => state?.home?.newFeedbackTitleName);
+  const navigate = useNavigate();
+  const { formId } = useParams();
+  const form = useSelector((state) => state?.form?.forms);
+  const filteredForm = form?.filter((form) => form.id === Number(formId))?.[0];
+
+  const handleBackButton = () => {
+    navigate(ROUTES.HOME);
+  };
 
   return (
     <StyledFeedbackFormContainer>
       <StyledFeedbackFormHeader>
         <StyledFeedbackFormHeading>
-          <img src={LeftArrowIcon} alt={STRINGS.LEFT_ARROW_ICON} />
-          <span>Generic Website Rating</span>
-          <img src={EditIcon} alt={STRINGS.EDIT_ICON} />
+          <StyledIcon
+            src={LeftArrowIcon}
+            alt={STRINGS.LEFT_ARROW_ICON}
+            onClick={handleBackButton}
+          />
+          <span>{filteredForm?.title}</span>
         </StyledFeedbackFormHeading>
       </StyledFeedbackFormHeader>
       <StyledFeedbackFormContentContainer>
@@ -31,6 +42,8 @@ const FeedbackForm = () => {
         <FormField smileyRating />
         <FormField singleLineText />
         <FormField numericRating />
+        <FormField radioInput />
+        <FormField multiChoice />
       </StyledFeedbackFormContentContainer>
     </StyledFeedbackFormContainer>
   );

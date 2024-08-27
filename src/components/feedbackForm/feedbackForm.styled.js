@@ -7,6 +7,7 @@ export const StyledFeedbackFormContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
   overflow-y: scroll;
+  padding-bottom: 14px;
 `;
 
 export const StyledFeedbackFormHeader = styled.section`
@@ -39,4 +40,8 @@ export const StyledEmptyFormText = styled.span`
   font-weight: 500;
   color: rgba(92, 88, 88, 1);
   margin: auto;
+`;
+
+export const StyledIcon = styled.img`
+  cursor: pointer;
 `;

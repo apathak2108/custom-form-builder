@@ -1,31 +1,34 @@
 import React, { useState } from "react";
-import Grid from "@mui/material/Grid";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import { Typography, Button, ButtonGroup } from "@mui/material";
 
-const NumericRating = ({ maxRating = 10 }) => {
-  const [rating, setRating] = useState(null);
+const NumericRating = () => {
+  const [rating, setRating] = useState(0);
 
-  const handleRatingClick = (value) => {
-    setRating(value);
+  const handleRatingChange = (newRating) => {
+    setRating(newRating);
   };
 
   return (
-    <Box>
-      <Grid container>
-        {Array.from({ length: maxRating }, (_, index) => (
-          <Grid item xs={1} key={index}>
-            <Button
-              variant={rating === index + 1 ? "contained" : "outlined"}
-              color="primary"
-              onClick={() => handleRatingClick(index + 1)}
-            >
-              {index + 1}
-            </Button>
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
+    <ButtonGroup size="small" aria-label="rating">
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+        <Button
+          key={num}
+          onClick={() => handleRatingChange(num)}
+          variant={rating === num ? "contained" : "outlined"}
+          color={rating === num ? "primary" : "inherit"}
+          sx={{
+            borderColor: "rgba(221, 212, 212, 1)", 
+            color: rating === num ? "white" : "rgba(100, 87, 87, 1)",
+            "&:hover": {
+              borderColor: "rgba(221, 212, 212, 1)",
+              color: rating === num ? "white" : "rgba(100, 87, 87, 1)",
+            },
+          }}
+        >
+          {num}
+        </Button>
+      ))}
+    </ButtonGroup>
   );
 };
 

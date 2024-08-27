@@ -14,7 +14,7 @@ const App = () => {
     <BrowserRouter>
       <Routes>
         <Route path={ROUTES.HOME} element={<HomeAdaptive />} />
-        <Route path={ROUTES.NEW_FEEDBACK} element={<NewFeedbackAdaptive />} />
+        <Route path={`${ROUTES.NEW_FEEDBACK}/:formId`} element={<NewFeedbackAdaptive />} />
         <Route path={ROUTES.OTHER} element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </BrowserRouter>
