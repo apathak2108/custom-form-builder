@@ -16,6 +16,7 @@ export const STRINGS = {
   SAVE: "SAVE",
   PUBLISH: "PUBLISH",
   CREATE: "Create",
+  ERROR: "error",
   CANCEL: "Cancel",
   DELIVERY: "Delivery",
   SUBMITTED: "Submitted",
@@ -34,6 +35,7 @@ export const STRINGS = {
   SECONDARY: "secondary",
   REQUIRED: "Required",
   LABEL: "Label",
+  NAME_LABEL: "label",
   ERROR_MESSAGE: "Error Message",
   VALUE: "Value",
   HELPER_TEXT: "Helper Text",
@@ -48,49 +50,88 @@ export const STRINGS = {
   ADD_LOGIC: "Add Logic",
   BACK_ICON: "back-icon",
   BACK_TO_FIELDS_TEXT: "Back to Add Fields",
+  EMPTY_TITLE_ERROR: "Please provide a feedback title",
+  TITLE_REQUIRED: "Title is required",
+  EMPTY_STRING: "",
+  OPTIONS: "Options",
+  TEXT: "text",
+  RATING: "rating",
+  CHOICE: "choice",
+  MULTILINE_TEXT: "multiline-text",
+  STAR_RATING: "star-rating",
+  SMILEY_RATING: "smiley-rating",
+  NUMERIC_RATING: "numeric-rating",
+  RADIO_CHOICE: "radio-choice",
+  MULTI_CHOICE: "multi-choice",
+};
+
+export const BOOLEAN = {
+  TRUE: true,
+  FALSE: false,
 };
 
 export const ROUTES = {
   HOME: "/",
-  NEW_FEEDBACK: "/new",
+  NEW_FEEDBACK: "/new-feedback",
   OTHER: "*",
 };
 
 export const SIDEBAR_ADD_FIELDS = [
   {
+    id: 1,
     name: "Textarea",
     icon: TEXT_AREA_ICON,
     alt: "text-area-icon",
+    type: "text",
+    subType: "multiline-text",
   },
   {
+    id: 2,
     name: "Numeric rating",
     icon: NUMERIC_RATING_ICON,
     alt: "numeric-rating-icon",
+    type: "rating",
+    subType: "numeric-rating",
   },
   {
+    id: 3,
     name: "Star rating",
     icon: STAR_RATING_ICON,
     alt: "star-rating-icon",
+    type: "rating",
+    subType: "star-rating",
   },
   {
+    id: 4,
     name: "Smiley rating",
     icon: SMILEY_RATING_ICON,
     alt: "smiley-rating-icon",
+    type: "rating",
+    subType: "smiley-rating",
   },
   {
+    id: 5,
     name: "Single line input",
     icon: SINGLE_LINE_ICON,
     alt: "single-line-icon",
+    type: "text",
+    subType: "singleline-text",
   },
   {
+    id: 6,
     name: "Radio button",
     icon: RADIO_BUTTON_ICON,
     alt: "radio-button-icon",
+    type: "choice",
+    subType: "radio-choice",
   },
   {
+    id: 7,
     name: "Categories",
     icon: CATEGORIES_ICON,
     alt: "categories-icon",
+    type: "choice",
+    subType: "multi-choice",
   },
 ];
 
@@ -115,3 +156,13 @@ export const TOGGLE_FIELDS = [
     id: "outlined-required",
   },
 ];
+
+export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
+
+export const DEFAULT_FIELD_CONFIG = {
+  label: STRINGS.EMPTY_STRING,
+  required: BOOLEAN.FALSE,
+  error: STRINGS.EMPTY_STRING,
+  options: DEFAULT_OPTIONS,
+  value: STRINGS.EMPTY_STRING,
+};
