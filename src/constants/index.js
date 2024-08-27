@@ -53,10 +53,16 @@ export const STRINGS = {
   EMPTY_TITLE_ERROR: "Please provide a feedback title",
   TITLE_REQUIRED: "Title is required",
   EMPTY_STRING: "",
+  OPTIONS: "Options",
   TEXT: "text",
   RATING: "rating",
-  OPTIONS: "Options",
   CHOICE: "choice",
+  MULTILINE_TEXT: "multiline-text",
+  STAR_RATING: "star-rating",
+  SMILEY_RATING: "smiley-rating",
+  NUMERIC_RATING: "numeric-rating",
+  RADIO_CHOICE: "radio-choice",
+  MULTI_CHOICE: "multi-choice",
 };
 
 export const BOOLEAN = {
@@ -77,6 +83,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: TEXT_AREA_ICON,
     alt: "text-area-icon",
     type: "text",
+    subType: "multiline-text",
   },
   {
     id: 2,
@@ -84,6 +91,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: NUMERIC_RATING_ICON,
     alt: "numeric-rating-icon",
     type: "rating",
+    subType: "numeric-rating",
   },
   {
     id: 3,
@@ -91,6 +99,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: STAR_RATING_ICON,
     alt: "star-rating-icon",
     type: "rating",
+    subType: "star-rating",
   },
   {
     id: 4,
@@ -98,6 +107,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: SMILEY_RATING_ICON,
     alt: "smiley-rating-icon",
     type: "rating",
+    subType: "smiley-rating",
   },
   {
     id: 5,
@@ -105,6 +115,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: SINGLE_LINE_ICON,
     alt: "single-line-icon",
     type: "text",
+    subType: "singleline-text",
   },
   {
     id: 6,
@@ -112,6 +123,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: RADIO_BUTTON_ICON,
     alt: "radio-button-icon",
     type: "choice",
+    subType: "radio-choice",
   },
   {
     id: 7,
@@ -119,6 +131,7 @@ export const SIDEBAR_ADD_FIELDS = [
     icon: CATEGORIES_ICON,
     alt: "categories-icon",
     type: "choice",
+    subType: "multi-choice",
   },
 ];
 
@@ -145,3 +158,11 @@ export const TOGGLE_FIELDS = [
 ];
 
 export const DEFAULT_OPTIONS = ["Option 1", "Option 2", "Option 3"];
+
+export const DEFAULT_FIELD_CONFIG = {
+  label: STRINGS.EMPTY_STRING,
+  required: BOOLEAN.FALSE,
+  error: STRINGS.EMPTY_STRING,
+  options: DEFAULT_OPTIONS,
+  value: STRINGS.EMPTY_STRING,
+};

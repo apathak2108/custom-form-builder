@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyledIcon,
   StyledBackHeading,
@@ -16,7 +16,7 @@ import {
 } from "./sidebarForm.styled";
 import {
   BOOLEAN,
-  DEFAULT_OPTIONS,
+  DEFAULT_FIELD_CONFIG,
   SIDEBAR_ADD_FIELDS,
   STRINGS,
   TOGGLE_FIELDS,
@@ -33,42 +33,48 @@ import BackIcon from "../../assets/sidebar/backIcon.svg";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addFieldToForm } from "../../redux/actions/form";
+import { handleSaveField } from "../../utils";
 
 const SidebarForm = () => {
   const dispatch = useDispatch();
   const { formId } = useParams();
-  const [isFieldOpen, setIsFieldOpen] = useState(false);
-  const [fieldType, setFieldType] = useState(null);
-  const [fieldConfig, setFieldConfig] = useState({
-    label: STRINGS.EMPTY_STRING,
-    required: BOOLEAN.FALSE,
-    error: STRINGS.EMPTY_STRING,
-    options: DEFAULT_OPTIONS,
-  });
-
+  const [isFieldOpen, setIsFieldOpen] = useState(BOOLEAN.FALSE);
+  const [fieldType, setFieldType] = useState(STRINGS.EMPTY_STRING);
+  const [fieldSubType, setFieldSubType] = useState(STRINGS.EMPTY_STRING);
+  const [fieldConfig, setFieldConfig] = useState(DEFAULT_FIELD_CONFIG);
+  const [isLabelEmpty, setIsLabelEmpty] = useState(false);
+  const [isFormValid, setIsFormValid] = useState(false);
   const forms = useSelector((state) => state?.form?.forms);
-  console.log(forms, "forms");
 
-  const handleCustomFieldOpen = (type) => {
+  useEffect(() => {
+    validateForm();
+  }, [fieldConfig]);
+
+  const handleCustomFieldOpen = (type, subType) => {
     resetFieldConfig();
     setFieldType(type);
-    setIsFieldOpen(true);
+    setFieldSubType(subType);
+    setIsFieldOpen(BOOLEAN.TRUE);
   };
 
   const resetFieldConfig = () => {
-    setFieldConfig({
-      label: STRINGS.EMPTY_STRING,
-      required: BOOLEAN.FALSE,
-      error: STRINGS.EMPTY_STRING,
-      options: DEFAULT_OPTIONS,
-    });
+    setFieldConfig(DEFAULT_FIELD_CONFIG);
+    setIsLabelEmpty(false);
+    setIsFormValid(false);
   };
 
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    const isLabel = name === STRINGS.NAME_LABEL;
+
     setFieldConfig({
       ...fieldConfig,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+
+    if (isLabel) {
+      setIsLabelEmpty(value.trim() === STRINGS.EMPTY_STRING);
+    }
   };
 
   const handleOptionChange = (e, index) => {
@@ -80,33 +86,27 @@ const SidebarForm = () => {
   const handleBackToFields = () => {
     resetFieldConfig();
     setFieldType(null);
-    setIsFieldOpen(false);
+    setIsFieldOpen(BOOLEAN.FALSE);
   };
 
-  const handleSaveField = () => {
-    let updatedFieldConfig = {
-      label: fieldConfig.label,
-      required: fieldConfig.required,
-    };
-    if (fieldType === STRINGS.TEXT) {
-      updatedFieldConfig = {
-        ...updatedFieldConfig,
-        error: fieldConfig.error,
-      };
+  const validateForm = () => {
+    const labelIsEmpty = fieldConfig.label.trim() === STRINGS.EMPTY_STRING;
+    setIsLabelEmpty(labelIsEmpty);
+    setIsFormValid(!labelIsEmpty);
+  };
+
+  const saveField = () => {
+    if (isFormValid) {
+      handleSaveField(
+        dispatch,
+        formId,
+        fieldType,
+        fieldConfig,
+        handleBackToFields,
+        addFieldToForm,
+        fieldSubType
+      );
     }
-    if (fieldType === STRINGS.CHOICE) {
-      updatedFieldConfig = {
-        ...updatedFieldConfig,
-        options: fieldConfig.options,
-      };
-    }
-    dispatch(
-      addFieldToForm(formId, {
-        type: fieldType,
-        config: updatedFieldConfig,
-      })
-    );
-    handleBackToFields();
   };
 
   return (
@@ -125,7 +125,9 @@ const SidebarForm = () => {
                   <StyledIcon
                     src={AddFieldIcon}
                     alt={STRINGS.ADD_FIELD_ICON}
-                    onClick={() => handleCustomFieldOpen(field.type)}
+                    onClick={() =>
+                      handleCustomFieldOpen(field.type, field.subType)
+                    }
                   />
                 </StyledSidebarField>
               ))}
@@ -167,6 +169,11 @@ const SidebarForm = () => {
               size={STRINGS.MEDIUM}
               value={fieldConfig.label}
               onChange={handleInputChange}
+              required
+              error={isLabelEmpty}
+              helperText={
+                isLabelEmpty ? STRINGS.LABEL_REQUIRED : STRINGS.EMPTY_STRING
+              }
             />
             <FormControlLabel
               control={
@@ -209,7 +216,8 @@ const SidebarForm = () => {
                 variant={STRINGS.CONTAINED}
                 color={STRINGS.PRIMARY}
                 size={STRINGS.LARGE}
-                onClick={handleSaveField}
+                onClick={saveField}
+                disabled={!isFormValid}
               >
                 {STRINGS.SAVE}
               </Button>

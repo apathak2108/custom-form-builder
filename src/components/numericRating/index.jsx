@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import { Typography, Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 
-const NumericRating = () => {
-  const [rating, setRating] = useState(0);
+const NumericRating = ({ value, onRatingChange }) => {
+  const [rating, setRating] = useState(value || 0);
 
   const handleRatingChange = (newRating) => {
     setRating(newRating);
+    if (onRatingChange) {
+      onRatingChange(newRating);
+    }
   };
 
   return (
@@ -17,7 +20,7 @@ const NumericRating = () => {
           variant={rating === num ? "contained" : "outlined"}
           color={rating === num ? "primary" : "inherit"}
           sx={{
-            borderColor: "rgba(221, 212, 212, 1)", 
+            borderColor: "rgba(221, 212, 212, 1)",
             color: rating === num ? "white" : "rgba(100, 87, 87, 1)",
             "&:hover": {
               borderColor: "rgba(221, 212, 212, 1)",

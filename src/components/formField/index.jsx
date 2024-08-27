@@ -22,48 +22,91 @@ import NumericRating from "../numericRating";
 import RectangularRadioGroup from "../rectangularRadio";
 
 const FormField = ({
-  multiLineText = false,
-  singleLineText = false,
-  numericRating = false,
-  smileyRating = false,
-  starRating = false,
-  radioInput = false,
-  multiChoice = false,
+  type,
+  subType,
+  config,
   onEdit,
   onDelete,
+  onChange,
+  onRatingChange,
 }) => {
+  const renderField = () => {
+    switch (type) {
+      case STRINGS.TEXT:
+        return (
+          <TextField
+            name={STRINGS.NAME_TEXT_FIELD}
+            multiline={subType === STRINGS.MULTILINE_TEXT}
+            rows={subType === STRINGS.MULTILINE_TEXT ? 3 : 1}
+            value={config.value}
+            error={!!config.error}
+            helperText={config.error}
+            onChange={onChange}
+            required={config.required}
+          />
+        );
+      case STRINGS.RATING:
+        if (subType === STRINGS.STAR_RATING) {
+          return (
+            <Rating
+              name={STRINGS.NAME_STAR_RATING}
+              value={config.value}
+              size={STRINGS.LARGE}
+              onChange={onChange}
+              emptyIcon={
+                <StarIcon style={{ opacity: 0.55 }} fontSize={STRINGS.LARGE} />
+              }
+            />
+          );
+        } else if (subType === STRINGS.SMILEY_RATING) {
+          return <SmileyRating value={config.rating} onChange={onChange} />;
+        } else if (subType === STRINGS.NUMERIC_RATING) {
+          return (
+            <NumericRating
+              value={config.rating}
+              onRatingChange={onRatingChange}
+            />
+          );
+        }
+        break;
+      case STRINGS.CHOICE:
+        if (subType === STRINGS.RADIO_CHOICE) {
+          return (
+            <RadioGroup
+              name={STRINGS.NAME_RADIO_GROUP}
+              value={config.value}
+              onChange={onChange}
+            >
+              {config?.options?.map((option, index) => (
+                <FormControlLabel
+                  key={index}
+                  value={option}
+                  control={<Radio />}
+                  label={option}
+                />
+              ))}
+            </RadioGroup>
+          );
+        } else if (subType === STRINGS.MULTI_CHOICE) {
+          return (
+            <RectangularRadioGroup
+              options={config.options}
+              selectedValue={config.value}
+              onRatingChange={onRatingChange}
+            />
+          );
+        }
+        break;
+      default:
+        return null;
+    }
+  };
+
   return (
     <StyledFormFieldContainer>
       <StyledFormField>
-        <StyledFormFieldLabel>
-          Would you like to add a comment?
-        </StyledFormFieldLabel>
-        {multiLineText && <TextField multiline rows={3} />}
-        {singleLineText && <TextField />}
-        {starRating && (
-          <Rating
-            size="large"
-            emptyIcon={<StarIcon style={{ opacity: 0.55 }} fontSize="large" />}
-          />
-        )}
-        {smileyRating && <SmileyRating />}
-        {numericRating && <NumericRating />}
-        {radioInput && (
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            defaultValue="female"
-            name="radio-buttons-group"
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-          </RadioGroup>
-        )}
-        {multiChoice && <RectangularRadioGroup />}
+        <StyledFormFieldLabel>{config?.label}</StyledFormFieldLabel>
+        {renderField()}
         <StyledFormFieldActionButtons>
           <StyledIcon src={EditIcon} alt={STRINGS.EDIT_ICON} onClick={onEdit} />
           <StyledIcon

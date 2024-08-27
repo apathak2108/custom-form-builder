@@ -46,7 +46,7 @@ IconContainer.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const SmileyRating = () => {
+const SmileyRating = ({ onChange }) => {
   return (
     <StyledRating
       name="highlight-selected-only"
@@ -54,6 +54,7 @@ const SmileyRating = () => {
       getLabelText={(value) => customIcons[value].label}
       highlightSelectedOnly
       size="large"
+      onChange={onChange}
     />
   );
 };

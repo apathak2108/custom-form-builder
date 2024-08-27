@@ -1,4 +1,9 @@
-import { ADD_FIELD_TO_FORM, CREATE_FORM } from "../actionTypes";
+import {
+  ADD_FIELD_TO_FORM,
+  CREATE_FORM,
+  REMOVE_FIELD,
+  SET_FIELD_VALUE,
+} from "../actionTypes";
 
 const intialState = {
   forms: [],
@@ -19,7 +24,6 @@ const formReducer = (state = intialState, action) => {
         ],
       };
     case ADD_FIELD_TO_FORM:
-      console.log(action.payload, "payload");
       return {
         ...state,
         forms: state.forms.map((form) =>
@@ -28,6 +32,44 @@ const formReducer = (state = intialState, action) => {
             : form
         ),
       };
+    case SET_FIELD_VALUE: {
+      const { formId, fieldIndex, newValue } = action.payload;
+      return {
+        ...state,
+        forms: state.forms.map((form) =>
+          form.id == formId
+            ? {
+                ...form,
+                fields: form.fields.map((field, index) =>
+                  index === fieldIndex
+                    ? {
+                        ...field,
+                        config: {
+                          ...field.config,
+                          value: newValue,
+                        },
+                      }
+                    : field
+                ),
+              }
+            : form
+        ),
+      };
+    }
+    case REMOVE_FIELD: {
+      const { formId, fieldId } = action.payload;
+      return {
+        ...state,
+        forms: state.forms.map((form) =>
+          form.id == formId
+            ? {
+                ...form,
+                fields: form.fields.filter((_, index) => index !== fieldId),
+              }
+            : form
+        ),
+      };
+    }
     default:
       return state;
   }

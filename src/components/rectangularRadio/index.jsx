@@ -1,43 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 
-const RectangularRadioGroup = () => {
-  const [selectedValue, setSelectedValue] = useState("female");
-
+const RectangularRadioGroup = ({ options, selectedValue, onRatingChange }) => {
   const handleSelect = (value) => {
-    setSelectedValue(value);
+    onRatingChange(value);
   };
-
-  const options = [
-    { value: "option 1", label: "option 1" },
-    { value: "option 2", label: "option 2" },
-    { value: "option 3", label: "option 3" },
-  ];
 
   return (
     <Box>
-      {options.map((option) => (
+      {options.map((option, index) => (
         <Button
-          key={option.value}
-          onClick={() => handleSelect(option.value)}
-          variant={selectedValue === option.value ? "contained" : "outlined"}
+          key={index}
+          onClick={() => handleSelect(option)}
+          variant={selectedValue === option ? "contained" : "outlined"}
           sx={{
             height: "40px",
             margin: "6px 12px 0 0",
             backgroundColor:
-              selectedValue === option.value ? "primary.main" : "white",
-            color:
-              selectedValue === option.value ? "white" : "rgba(100, 87, 87, 1)",
+              selectedValue === option ? "primary.main" : "white",
+            color: selectedValue === option ? "white" : "rgba(100, 87, 87, 1)",
             borderColor: "rgba(221, 212, 212, 1)",
             "&:hover": {
               backgroundColor:
-                selectedValue === option.value
+                selectedValue === option
                   ? "primary.dark"
                   : "rgba(221, 212, 212, 0.5)",
             },
           }}
         >
-          <Typography>{option.label}</Typography>
+          <Typography>{option}</Typography>
         </Button>
       ))}
     </Box>
