@@ -23,7 +23,6 @@ export const removeField = (formId, fieldId) => ({
   payload: { formId, fieldId },
 });
 
-
 export const setFieldValue = (formId, fieldIndex, newValue) => ({
   type: SET_FIELD_VALUE,
   payload: { formId, fieldIndex, newValue },

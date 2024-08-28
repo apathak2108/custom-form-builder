@@ -63,7 +63,22 @@ export const STRINGS = {
   NUMERIC_RATING: "numeric-rating",
   RADIO_CHOICE: "radio-choice",
   MULTI_CHOICE: "multi-choice",
+  FORMS: "forms",
+  SUBMISSIONS: "submissions",
 };
+
+export const FIREBASE_MESSAGES = {
+  FORM_PUBLISH_SUCEESS: "Form published successfully!",
+  FORM_PUBLISHED_ALREADY: "Form is already published and cannot be published again!",
+  FORM_PUBLISH_ERROR: "Error publishing form: ",
+  FORM_SAVE_SUCCESS: "Form saved successfully!",
+  FORM_SAVE_ERROR: "Error saving form: ",
+  FORM_SUBMIT_SUCCESS: "Form submitted successfully",
+  FORM_SUBMIT_ERROR: "Error submitting form: ",
+  FORM_FETCH_ERROR: "Error fetching published forms: ",
+  FORM_DELETE_SUCCESS: "Form deleted successfully",
+  FORM_DELETE_ERROR: "Error deleting form: ",
+}
 
 export const BOOLEAN = {
   TRUE: true,
@@ -73,6 +88,7 @@ export const BOOLEAN = {
 export const ROUTES = {
   HOME: "/",
   NEW_FEEDBACK: "/new-feedback",
+  EDIT_FEEDBACK: "/edit-feedback",
   OTHER: "*",
 };
 

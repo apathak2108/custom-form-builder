@@ -15,7 +15,14 @@ import FeedbackCardLogo from "../../assets/feedbackCard/headerLogo.svg";
 import { STRINGS } from "../../constants";
 import { Button } from "@mui/material";
 
-const FeedbackCard = ({ submittedCount, viewedCount, datePublished }) => {
+const FeedbackCard = ({
+  submittedCount,
+  viewedCount,
+  datePublished,
+  onDelete,
+  onEdit,
+}) => {
+
   return (
     <StyledFeedbackCardContainer>
       <StyledFeedbackCardHeader>
@@ -28,15 +35,15 @@ const FeedbackCard = ({ submittedCount, viewedCount, datePublished }) => {
         <StyledFeedbackCardContentContainer>
           <StyledFeedbackCardContent>
             <StyledContentOne>{STRINGS.SUBMITTED}</StyledContentOne>
-            <StyledContentTwo>10</StyledContentTwo>
+            <StyledContentTwo>{submittedCount}</StyledContentTwo>
           </StyledFeedbackCardContent>
           <StyledFeedbackCardContent>
             <StyledContentOne>{STRINGS.VIEWED}</StyledContentOne>
-            <StyledContentTwo>10</StyledContentTwo>
+            <StyledContentTwo>{viewedCount}</StyledContentTwo>
           </StyledFeedbackCardContent>
           <StyledFeedbackCardContent>
             <StyledContentOne>{STRINGS.DATE_PUBLISHED}</StyledContentOne>
-            <StyledContentTwo>10/10/2020</StyledContentTwo>
+            <StyledContentTwo>{datePublished}</StyledContentTwo>
           </StyledFeedbackCardContent>
         </StyledFeedbackCardContentContainer>
       </StyledFeedbackCardDetails>
@@ -45,10 +52,15 @@ const FeedbackCard = ({ submittedCount, viewedCount, datePublished }) => {
           {STRINGS.VIEW_SUBMISSION}
         </Button>
         <StyledEditAndDeleteButtonsContainer>
-          <Button variant={STRINGS.CONTAINED} color={STRINGS.SUCCESS} fullWidth>
+          <Button variant={STRINGS.CONTAINED} color={STRINGS.SUCCESS} onClick={onEdit} fullWidth>
             {STRINGS.EDIT}
           </Button>
-          <Button variant={STRINGS.CONTAINED} color={STRINGS.PRIMARY} fullWidth>
+          <Button
+            variant={STRINGS.CONTAINED}
+            color={STRINGS.PRIMARY}
+            onClick={onDelete}
+            fullWidth
+          >
             {STRINGS.DELETE}
           </Button>
         </StyledEditAndDeleteButtonsContainer>
