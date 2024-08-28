@@ -75,7 +75,7 @@ const FeedbackForm = () => {
               onDelete={() => handleDeleteField(index)}
             />
           ))}
-        {fieldsLength && (
+        {fieldsLength !== 0 && (
           <Button
             variant={STRINGS.CONTAINED}
             color={STRINGS.PRIMARY}
