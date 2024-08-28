@@ -8,13 +8,34 @@ import {
 import HeaderLogo from "../../assets/header/headerLogo.svg";
 import { Button } from "@mui/material";
 import { ROUTES, STRINGS } from "../../constants";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { publishForm, saveForm } from "../../firebaseUtils";
 
 const Header = ({ flag = false }) => {
+  const { formId } = useParams();
   const navigate = useNavigate();
   const handleHeaderLogoClick = () => {
     navigate(ROUTES.HOME);
   };
+  const formData = useSelector((state) =>
+    state?.form?.forms?.filter((f) => f.id === Number(formId))
+  );
+  const handleFormPublish = async () => {
+    if (formData && formData.length > 0) {
+      const formToPublish = formData[0];
+      await publishForm(formId, formToPublish);
+      window.location.href = ROUTES.HOME;
+    }
+  };
+  const handleSaveForm = async () => {
+    if (formData && formData.length > 0) {
+      const formToSave = formData[0];
+      await saveForm(formId, formToSave);
+      navigate(ROUTES.HOME);
+    }
+  };
+
   return (
     <StyledHeader>
       <StyledLeftHeader onClick={handleHeaderLogoClick}>
@@ -23,10 +44,18 @@ const Header = ({ flag = false }) => {
       </StyledLeftHeader>
       {flag && (
         <StyledRightHeader>
-          <Button variant={STRINGS.CONTAINED} color={STRINGS.PRIMARY}>
+          <Button
+            variant={STRINGS.CONTAINED}
+            color={STRINGS.PRIMARY}
+            onClick={handleSaveForm}
+          >
             {STRINGS.SAVE}
           </Button>
-          <Button variant={STRINGS.CONTAINED} color={STRINGS.SUCCESS}>
+          <Button
+            variant={STRINGS.CONTAINED}
+            color={STRINGS.SUCCESS}
+            onClick={handleFormPublish}
+          >
             {STRINGS.PUBLISH}
           </Button>
         </StyledRightHeader>

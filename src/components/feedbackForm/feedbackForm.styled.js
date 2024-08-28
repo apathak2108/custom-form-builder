@@ -6,8 +6,8 @@ export const StyledFeedbackFormContainer = styled.div`
   background-color: rgba(255, 255, 255, 1);
   border-radius: 8px;
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  overflow-y: scroll;
   padding-bottom: 14px;
+  overflow-y: scroll;
 `;
 
 export const StyledFeedbackFormHeader = styled.section`

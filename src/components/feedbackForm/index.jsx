@@ -8,11 +8,14 @@ import {
   StyledIcon,
 } from "./feedbackForm.styled";
 import LeftArrowIcon from "../../assets/feedbackForm/leftArrowIcon.svg";
-import { ROUTES, STRINGS } from "../../constants";
+import { FIREBASE_MESSAGES, ROUTES, STRINGS } from "../../constants";
 import { useDispatch, useSelector } from "react-redux";
 import FormField from "../formField";
 import { useNavigate, useParams } from "react-router-dom";
 import { removeField, setFieldValue } from "../../redux/actions/form";
+import { Button } from "@mui/material";
+import { toast } from "react-toastify";
+import { addFormSubmission } from "../../firebaseUtils";
 
 const FeedbackForm = () => {
   const navigate = useNavigate();
@@ -34,7 +37,16 @@ const FeedbackForm = () => {
   const handleDeleteField = (fieldIndex) => {
     dispatch(removeField(formId, fieldIndex));
   };
-  console.log(filteredForm, "filteredForm");
+  const handleFormSubmit = async () => {
+    if (filteredForm) {
+      try {
+        await addFormSubmission(formId, filteredForm);
+        toast.success(FIREBASE_MESSAGES.FORM_SUBMIT_SUCCESS);
+      } catch (error) {
+        toast.error(FIREBASE_MESSAGES.FORM_SUBMIT_ERROR + error.message);
+      }
+    }
+  };
   return (
     <StyledFeedbackFormContainer>
       <StyledFeedbackFormHeader>
@@ -63,6 +75,16 @@ const FeedbackForm = () => {
               onDelete={() => handleDeleteField(index)}
             />
           ))}
+        {fieldsLength && (
+          <Button
+            variant={STRINGS.CONTAINED}
+            color={STRINGS.PRIMARY}
+            sx={{ mt: "14px" }}
+            onClick={handleFormSubmit}
+          >
+            {STRINGS.SUBMIT}
+          </Button>
+        )}
       </StyledFeedbackFormContentContainer>
     </StyledFeedbackFormContainer>
   );

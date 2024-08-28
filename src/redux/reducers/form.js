@@ -20,6 +20,11 @@ const formReducer = (state = intialState, action) => {
             id: action.payload.id,
             title: action.payload.title,
             fields: [],
+            published: false,
+            updatedAt: new Date(),
+            submittedAt: null,
+            viewedCount: 0,
+            submissionCount: 1,
           },
         ],
       };
